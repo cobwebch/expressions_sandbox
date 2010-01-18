@@ -21,11 +21,6 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
-/**
- * [CLASS/FUNCTION INDEX of SCRIPT]
- *
- * Hint: use extdeveval to insert/update function index above.
- */
 
 require_once(PATH_tslib.'class.tslib_pibase.php');
 
@@ -33,9 +28,11 @@ require_once(PATH_tslib.'class.tslib_pibase.php');
 /**
  * Plugin 'Expressions sandbox' for the 'expressions_sandbox' extension.
  *
- * @author	Francois Suter (Cobweb) <typo3@cobweb.ch>
- * @package	TYPO3
+ * @author		Francois Suter (Cobweb) <typo3@cobweb.ch>
+ * @package		TYPO3
  * @subpackage	tx_expressionssandbox
+ *
+ * $Id$
  */
 class tx_expressionssandbox_pi1 extends tslib_pibase {
 	var $prefixId      = 'tx_expressionssandbox_pi1';		// Same as class name
@@ -50,26 +47,40 @@ class tx_expressionssandbox_pi1 extends tslib_pibase {
 	 * @return	The content that is displayed on the website
 	 */
 	function main($content, $conf) {
-		$this->conf = $conf;
-		$this->pi_setPiVarDefaults();
-		$this->pi_loadLL();
 		$this->pi_USER_INT_obj = 1;	// Configuring so caching is not expected. This value means that no cHash params are ever set. We do this, because it's a USER_INT object!
-	
-		$content='
-			<strong>This is a few paragraphs:</strong><br />
-			<p>This is line 1</p>
-			<p>This is line 2</p>
-	
-			<h3>This is a form:</h3>
-			<form action="'.$this->pi_getPageLink($GLOBALS['TSFE']->id).'" method="POST">
-				<input type="text" name="'.$this->prefixId.'[input_field]" value="'.htmlspecialchars($this->piVars['input_field']).'">
-				<input type="submit" name="'.$this->prefixId.'[submit_button]" value="'.htmlspecialchars($this->pi_getLL('submit_button_label')).'">
-			</form>
-			<br />
-			<p>You can click here to '.$this->pi_linkToPage('get to this page again',$GLOBALS['TSFE']->id).'</p>
-		';
+		$this->init($conf);
+
+		$expressionsField = $this->conf['expressionsField'];
+		$content = nl2br($expressionsField);
 	
 		return $this->pi_wrapInBaseClass($content);
+	}
+
+	/**
+	 * This method performs various initialisations
+	 *
+	 * @param	array		$conf: plugin configuration, as received by the main() method
+	 * @return	void
+	 */
+	function init($conf) {
+		$this->pi_loadLL();
+			// Base configuration is equal the the plugin's TS setup
+		$this->conf = $conf;
+
+			// Load the flexform and loop on all its values to override TS setup values
+		$this->pi_initPIflexForm();
+		if (is_array($this->cObj->data['pi_flexform']['data'])) {
+			foreach ($this->cObj->data['pi_flexform']['data'] as $sheet => $langData) {
+				foreach ($langData as $fields) {
+					foreach ($fields as $field => $value) {
+						$value = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], $field, $sheet);
+						if (!empty($value)) {
+							$this->conf[$field] = $value;
+						}
+					}
+				}
+			}
+		}
 	}
 }
 

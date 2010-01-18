@@ -7,6 +7,8 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="tt_content.list_type_pi1">Expressions sandbox</label>
+			<label index="expressions_sandbox.pi_flexform.sheetExpressions">Expressions</label>
+			<label index="expressions_sandbox.pi_flexform.expressionsField">Expressions</label>
 		</languageKey>
 	</data>
 </T3locallang>

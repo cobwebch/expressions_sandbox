@@ -1,0 +1,25 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:expressions_sandbox/locallang_db.xml:expressions_sandbox.pi_flexform.sheetExpressions</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<expressionsField>
+						<TCEforms>
+							<label>LLL:EXT:expressions_sandbox/locallang_db.xml:expressions_sandbox.pi_flexform.expressionsField</label>
+							<config>
+								<type>text</type>
+							</config>
+						</TCEforms>
+					</expressionsField>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>
