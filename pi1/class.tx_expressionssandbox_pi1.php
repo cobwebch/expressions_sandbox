@@ -57,10 +57,10 @@ class tx_expressionssandbox_pi1 extends tslib_pibase {
 		foreach ($expressions as $anExpression) {
 			try {
 				$result = tx_expressions_parser::evaluateExpression($anExpression);
-				$content .= '<p>' . sprintf($this->pi_getLL('expression_parsed'), $anExpression, $result) . '</p>';
+				$content .= '<p>' . sprintf($this->pi_getLL('expression_parsed'), '<code>' . $anExpression . '</code>', '<strong>' . $result . '</strong>') . '</p>';
 			}
 			catch (Exception $e) {
-				$content .= '<p>' . sprintf($this->pi_getLL('expression_not_parsed'), $anExpression) . '</p>';
+				$content .= '<p>' . sprintf($this->pi_getLL('expression_not_parsed'), '<code>' . $anExpression . '</code>') . '</p>';
 			}
 		}
 		return $this->pi_wrapInBaseClass($content);
