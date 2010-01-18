@@ -22,7 +22,8 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(PATH_tslib.'class.tslib_pibase.php');
+require_once(PATH_tslib . 'class.tslib_pibase.php');
+require_once(t3lib_extMgm::extPath('expressions', 'class.tx_expressions_parser.php'));
 
 
 /**
@@ -49,10 +50,19 @@ class tx_expressionssandbox_pi1 extends tslib_pibase {
 	function main($content, $conf) {
 		$this->pi_USER_INT_obj = 1;	// Configuring so caching is not expected. This value means that no cHash params are ever set. We do this, because it's a USER_INT object!
 		$this->init($conf);
+		$content = '';
 
 		$expressionsField = $this->conf['expressionsField'];
-		$content = nl2br($expressionsField);
-	
+		$expressions = t3lib_div::trimExplode("\n", $expressionsField, TRUE);
+		foreach ($expressions as $anExpression) {
+			try {
+				$result = tx_expressions_parser::evaluateExpression($anExpression);
+				$content .= '<p>' . sprintf($this->pi_getLL('expression_parsed'), $anExpression, $result) . '</p>';
+			}
+			catch (Exception $e) {
+				$content .= '<p>' . sprintf($this->pi_getLL('expression_not_parsed'), $anExpression) . '</p>';
+			}
+		}
 		return $this->pi_wrapInBaseClass($content);
 	}
 
