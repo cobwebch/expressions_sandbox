@@ -36,9 +36,9 @@ require_once(t3lib_extMgm::extPath('expressions', 'class.tx_expressions_parser.p
  * $Id$
  */
 class tx_expressionssandbox_pi1 extends tslib_pibase {
-	var $prefixId      = 'tx_expressionssandbox_pi1';		// Same as class name
-	var $scriptRelPath = 'pi1/class.tx_expressionssandbox_pi1.php';	// Path to this script relative to the extension dir.
-	var $extKey        = 'expressions_sandbox';	// The extension key.
+	public $prefixId      = 'tx_expressionssandbox_pi1';		// Same as class name
+	public $scriptRelPath = 'pi1/class.tx_expressionssandbox_pi1.php';	// Path to this script relative to the extension dir.
+	public $extKey        = 'expressions_sandbox';	// The extension key.
 	
 	/**
 	 * The main method of the PlugIn
@@ -47,7 +47,7 @@ class tx_expressionssandbox_pi1 extends tslib_pibase {
 	 * @param	array		$conf: The PlugIn configuration
 	 * @return	The content that is displayed on the website
 	 */
-	function main($content, $conf) {
+	public function main($content, $conf) {
 		$this->pi_USER_INT_obj = 1;	// Configuring so caching is not expected. This value means that no cHash params are ever set. We do this, because it's a USER_INT object!
 		$this->init($conf);
 		$content = '';
@@ -72,7 +72,7 @@ class tx_expressionssandbox_pi1 extends tslib_pibase {
 	 * @param	array		$conf: plugin configuration, as received by the main() method
 	 * @return	void
 	 */
-	function init($conf) {
+	protected function init($conf) {
 		$this->pi_loadLL();
 			// Base configuration is equal the the plugin's TS setup
 		$this->conf = $conf;
