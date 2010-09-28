@@ -57,6 +57,9 @@ class tx_expressionssandbox_pi1 extends tslib_pibase {
 		foreach ($expressions as $anExpression) {
 			try {
 				$result = tx_expressions_parser::evaluateExpression($anExpression);
+				if (is_array($result)) {
+					$result = t3lib_div::view_array($result);
+				}
 				$content .= '<p>' . sprintf($this->pi_getLL('expression_parsed'), '<code>' . $anExpression . '</code>', '<strong>' . $result . '</strong>') . '</p>';
 			}
 			catch (Exception $e) {
