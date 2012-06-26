@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2010 Francois Suter (Cobweb) <typo3@cobweb.ch>
+*  (c) 2010-2012 Francois Suter (Cobweb) <typo3@cobweb.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -39,13 +39,13 @@ class tx_expressionssandbox_pi1 extends tslib_pibase {
 	public $prefixId      = 'tx_expressionssandbox_pi1';		// Same as class name
 	public $scriptRelPath = 'pi1/class.tx_expressionssandbox_pi1.php';	// Path to this script relative to the extension dir.
 	public $extKey        = 'expressions_sandbox';	// The extension key.
-	
+
 	/**
 	 * The main method of the PlugIn
 	 *
-	 * @param	string		$content: The PlugIn content
-	 * @param	array		$conf: The PlugIn configuration
-	 * @return	The content that is displayed on the website
+	 * @param string $content The PlugIn's content (empty in this case)
+	 * @param array $conf The PlugIn configuration
+	 * @return string The content that is displayed on the website
 	 */
 	public function main($content, $conf) {
 		$this->pi_USER_INT_obj = 1;	// Configuring so caching is not expected. This value means that no cHash params are ever set. We do this, because it's a USER_INT object!
@@ -58,7 +58,7 @@ class tx_expressionssandbox_pi1 extends tslib_pibase {
 			try {
 				$result = tx_expressions_parser::evaluateExpression($anExpression);
 				if (is_array($result)) {
-					$result = t3lib_div::view_array($result);
+					$result = t3lib_utility_Debug::viewArray($result);
 				}
 				$content .= '<p>' . sprintf($this->pi_getLL('expression_parsed'), '<code>' . $anExpression . '</code>', '<strong>' . $result . '</strong>') . '</p>';
 			}
