@@ -1,3 +1,7 @@
+2013-05-27 Francois Suter (Cobweb)  <typo3@cobweb.ch>
+
+	* Verified compatibility with TYPO3 6.0 and 6.1
+
 2012-06-26 Francois Suter (Cobweb)  <typo3@cobweb.ch>
 
 	* Removed obsolete code, now requires TYPO3 4.5+
