@@ -1,3 +1,7 @@
+2013-11-12 Francois Suter (Cobweb)  <typo3@cobweb.ch>
+
+	* Remove inclusion of tslib_pibase, resolves #53569
+
 2013-05-27 Francois Suter (Cobweb)  <typo3@cobweb.ch>
 
 	* Verified compatibility with TYPO3 6.0 and 6.1
