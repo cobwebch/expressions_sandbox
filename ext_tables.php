@@ -14,7 +14,7 @@ t3lib_extMgm::addPlugin(array(
 	t3lib_extMgm::extRelPath($_EXTKEY) . 'ext_icon.gif'
 ),'list_type');
 
-	// Activate the display of the plug-in flexform field and set FlexForm defintion
+	// Activate the display of the plug-in flexform field and set FlexForm definition
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:expressions_sandbox/flexform_ds.xml');
 ?>

@@ -76,7 +76,7 @@ class tx_expressionssandbox_pi1 extends tslib_pibase {
 	 */
 	protected function init($conf) {
 		$this->pi_loadLL();
-			// Base configuration is equal the the plugin's TS setup
+			// Base configuration is equal the the plug-in's TS setup
 		$this->conf = $conf;
 
 			// Load the flexform and loop on all its values to override TS setup values
