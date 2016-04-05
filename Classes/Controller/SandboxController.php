@@ -14,6 +14,9 @@ namespace Cobweb\ExpressionsSandbox\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Cobweb\Expressions\ExpressionParser;
+use TYPO3\CMS\Core\Utility\DebugUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Plugin 'Expressions sandbox' for the 'expressions_sandbox' extension.
@@ -28,10 +31,10 @@ class SandboxController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	public $extKey        = 'expressions_sandbox';	// The extension key.
 
 	/**
-	 * The main method of the PlugIn
+	 * The main method of the Plugin
 	 *
-	 * @param string $content The PlugIn's content (empty in this case)
-	 * @param array $conf The PlugIn configuration
+	 * @param string $content The Plugin's content (empty in this case)
+	 * @param array $conf The Plugin configuration
 	 * @return string The content that is displayed on the website
 	 */
 	public function main($content, $conf) {
@@ -40,12 +43,12 @@ class SandboxController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$content = '';
 
 		$expressionsField = $this->conf['expressionsField'];
-		$expressions = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode("\n", $expressionsField, TRUE);
+		$expressions = GeneralUtility::trimExplode("\n", $expressionsField, TRUE);
 		foreach ($expressions as $anExpression) {
 			try {
-				$result = \Cobweb\Expressions\ExpressionParser::evaluateExpression($anExpression);
+				$result = ExpressionParser::evaluateExpression($anExpression);
 				if (is_array($result)) {
-					$result = \TYPO3\CMS\Core\Utility\DebugUtility::viewArray($result);
+					$result = DebugUtility::viewArray($result);
 				}
 				$content .= '<p>' . sprintf($this->pi_getLL('expression_parsed'), '<code>' . $anExpression . '</code>', '<strong>' . $result . '</strong>') . '</p>';
 			}
@@ -63,7 +66,7 @@ class SandboxController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 * @return void
 	 */
 	protected function init($conf) {
-		$this->pi_loadLL();
+		$this->pi_loadLL('EXT:expressions_sandbox/Resources/Private/Language/locallang.xlf');
 		// Base configuration is equal to the plug-in's TS setup
 		$this->conf = $conf;
 

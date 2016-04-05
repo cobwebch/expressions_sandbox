@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-08-13T22:46:35Z" product-name="expressions_sandbox">
+		<header />
+		<body>
+			<trans-unit id="expression_parsed">
+				<source>Expression: %1$s => Result: %2$s</source>
+			</trans-unit>
+			<trans-unit id="expression_not_parsed">
+				<source>Expression: %s could not be parsed</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
