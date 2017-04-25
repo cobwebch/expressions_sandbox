@@ -27,5 +27,5 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_pi1'] = 'pi_flexform';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
 	$_EXTKEY . '_pi1',
-	'FILE:EXT:expressions_sandbox/flexform_ds.xml'
+	'FILE:EXT:expressions_sandbox/Configuration/FlexForm/flexform_ds.xml'
 );
